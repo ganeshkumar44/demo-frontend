@@ -7,6 +7,7 @@ import "../src/styles/global.css";
 // import { store } from "./redux/store/store";
 import App from "./App";
 import Dashboard from "./components/dashboard/Dashboard"; // Your dashboard component
+import Users from "./components/users/Users";
 
 const root = ReactDOM.createRoot(document.getElementById("root")); // Updated to createRoot
 
@@ -16,6 +17,7 @@ root.render(
     <Routes>
       <Route path="/login" element={<App />} />
       <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/users" element={<Users />} />
     </Routes>
   </Router>
 );

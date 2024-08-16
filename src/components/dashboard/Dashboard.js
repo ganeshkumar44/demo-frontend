@@ -1,6 +1,7 @@
 import { Button } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from '../header/Header';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -49,7 +50,9 @@ const Dashboard = () => {
 
   return (
     <div>
-      <Button onClick={handleLogout}>Logout</Button>
+        <Header 
+         handleLogout={handleLogout}
+        />
     </div>
   );
 }
