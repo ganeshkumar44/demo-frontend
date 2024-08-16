@@ -5,5 +5,5 @@
 
 /* Custom CSS */
 .header {
-    @apply w-full bg-black
+  @apply w-full bg-black;
 }
