@@ -1,12 +1,12 @@
 import React from "react";
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import "../src/styles/global.css";
 // import { Provider } from "react-redux";
 // import { store } from "./redux/store/store";
 import App from "./App";
-import Dashboard from './components/dashboard/Dashboard'; // Your dashboard component
+import Dashboard from "./components/dashboard/Dashboard"; // Your dashboard component
 
 const root = ReactDOM.createRoot(document.getElementById("root")); // Updated to createRoot
 
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById("root")); // Updated to
 root.render(
   <Router>
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/login" element={<App />} />
       <Route path="/dashboard" element={<Dashboard />} />
     </Routes>
   </Router>
