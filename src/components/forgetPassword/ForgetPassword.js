@@ -17,6 +17,11 @@ const ForgetPassword = () => {
   const [emailDisabled, setEmailDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [codeSent, setCodeSent] = useState(false);
+
+//   const generateCode = () => {
+//     return Math.floor(100000 + Math.random() * 900000); // Generate a 6-digit code
+//   };
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -36,6 +41,47 @@ const ForgetPassword = () => {
       }
     } catch (err) {
       setError("An error occurred. Please try again later.");
+    }
+
+    setLoading(false);
+  };
+
+  const handleSendCode = async () => {
+    setLoading(true);
+    setError("");
+
+    try {
+      // Send the request to your API to generate and send the code
+      const response = await fetch("http://localhost:5000/api/users/send-code", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Update the user data in the API with the new code and expiration time
+        const expirationTime = new Date(Date.now() + 10 * 60000).toISOString(); // Set expiration time to 10 minutes from now
+        await fetch(`http://localhost:5000/api/users/email/${email}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            forgetPasswordCode: data.code,
+            forgetPasswordCodeExpires: expirationTime,
+          }),
+        });
+
+        setCodeSent(true); // Hide the "Send Code" button
+      } else {
+        setError(data.message || "Failed to send the code. Please try again.");
+      }
+    } catch (err) {
+      setError("Failed to send the code. Please try again.");
     }
 
     setLoading(false);
@@ -78,14 +124,25 @@ const ForgetPassword = () => {
               >
                 {loading ? <CircularProgress size={24} /> : "Search"}
               </Button>
+            ) : !codeSent ? (
+              <Button
+                type="button"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                onClick={handleSendCode}
+              >
+                Send Code
+              </Button>
             ) : (
               <Button
                 type="button"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
+                onClick={() => alert("Proceed to the next step")}
               >
-                Send Code
+                Next
               </Button>
             )}
             {error && (
