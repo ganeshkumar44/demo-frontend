@@ -5,13 +5,13 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
   Grid,
   Box,
   Typography,
   Container,
   CircularProgress,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
@@ -57,7 +57,7 @@ const Login = () => {
     Promise.all([loadTime, validation])
       .then(([_, user]) => {
         // Save user info to sessionStorage
-        sessionStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem("user", JSON.stringify(user));
 
         setLoading(false); // Stop loading
         navigate("/dashboard"); // Redirect to dashboard page
@@ -71,8 +71,8 @@ const Login = () => {
   return (
     <>
       <Container component="main" maxWidth="xs">
-        <Box 
-          className="p-5 shadow-blackShadow02 rounded-[10px] my-[50px] flex items-center"
+        <Box
+          className="p-5 w-[100%] max-w-[400px] shadow-blackShadow02 rounded-[10px] my-[50px] flex items-center"
           sx={{
             flexDirection: "column",
           }}
@@ -81,6 +81,7 @@ const Login = () => {
             Sign in
           </Typography>
           <Box
+            className="w-100"
             component="form"
             onSubmit={handleSubmit}
             noValidate
@@ -124,15 +125,27 @@ const Login = () => {
               {loading ? <CircularProgress size={24} /> : "Sign In"}{" "}
               {/* Show loading spinner */}
             </Button>
-            {error && <Typography className="text-center !mb-3" color="error">{error}</Typography>}
+            {error && (
+              <Typography className="text-center !mb-3" color="error">
+                {error}
+              </Typography>
+            )}
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link
+                  className="text-font15 text-blue"
+                  to="/forget-password"
+                  variant="body2"
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link
+                  className="text-font15 text-blue"
+                  to="/register"
+                  variant="body2"
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
