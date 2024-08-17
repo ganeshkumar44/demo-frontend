@@ -3,11 +3,11 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import "../src/styles/global.css";
-// import { Provider } from "react-redux";
-// import { store } from "./redux/store/store";
 import App from "./App";
-import Dashboard from "./components/dashboard/Dashboard"; // Your dashboard component
+import Dashboard from "./components/dashboard/Dashboard";
 import Users from "./components/users/Users";
+import Register from "./components/register/Register";
+import ForgetPassword from "./components/forgetPassword/ForgetPassword";
 
 const root = ReactDOM.createRoot(document.getElementById("root")); // Updated to createRoot
 
@@ -18,6 +18,8 @@ root.render(
       <Route path="/login" element={<App />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/users" element={<Users />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forget-password" element={<ForgetPassword />} />
     </Routes>
   </Router>
 );
